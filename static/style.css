@@ -1,0 +1,31 @@
+:root{--accent:#2b6cb0;--bg:#f7fafc;--overlay:rgba(0,0,0,0.45)}
+html,body{height:100%}
+body{font-family:Segoe UI,Roboto,Arial,Helvetica,sans-serif;margin:0; color:#fff;
+	/* use the profile image as a subtle background */
+	background-image: url('/static/avatar.png');
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+/* dark overlay to improve contrast */
+body::before{
+	content:'';position:fixed;inset:0;background:var(--overlay);z-index:0;
+}
+
+.container{position:relative;z-index:1;max-width:900px;margin:40px auto;padding:24px 20px}
+.navbar{background:rgba(255,255,255,0.06);backdrop-filter:blur(4px);border-bottom:1px solid rgba(255,255,255,0.06)}
+.navbar .container{display:flex;align-items:center;justify-content:space-between;padding:8px 16px}
+.brand{font-weight:700;color:#fff;text-decoration:none}
+.nav{list-style:none;margin:0;padding:0;display:flex;gap:12px}
+.nav a{text-decoration:none;color:#f0f6fb}
+.footer{padding:12px 16px;text-align:center;color:#dfe7ef}
+h1,h2,h3{color:#f7fbff}
+.profile{display:flex;gap:16px;align-items:flex-start}
+.avatar{width:120px;height:120px;object-fit:cover;border-radius:8px;background:#ddd;border:3px solid rgba(255,255,255,0.12)}
+.bio{background:rgba(0,0,0,0.35);padding:12px;border-radius:8px}
+.calc{background:rgba(255,255,255,0.06);padding:12px;border-radius:8px;margin-top:12px;border:1px solid rgba(255,255,255,0.06)}
+label{display:block;margin:6px 0;color:#eef6ff}
+button{background:var(--accent);color:#fff;border:0;padding:8px 12px;border-radius:4px;cursor:pointer}
+button:hover{opacity:.95}
+
