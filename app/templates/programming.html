@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Programming - My Portfolio{% endblock %}
+
+{% block content %}
+  <section class="index-hero site-theme">
+    <!-- header banner similar to reference site -->
+    <div class="prog-header">
+      <div class="prog-banner">
+        <div class="banner-left">PROGRAMMING</div>
+      </div>
+      <div class="prog-stripe" aria-hidden="true">
+        <div class="stripe-inner">
+              <div class="stripe-item"><span class="stripe-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+              </span></div>
+              <div class="stripe-item"><span class="stripe-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+              </span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- main title is shown in the banner-left, no duplicate heading here -->
+
+    <div class="container index-content">
+      <div class="works-grid">
+        <a class="work-card library-card" href="/programming/circle" aria-label="Area of a Circle">
+          <div class="work-thumb" aria-hidden="true">
+            <img src="/static/image/prog-circle.svg" alt="Area of a Circle thumbnail">
+          </div>
+          <div class="card-body">
+            <div class="work-title">Area of a Circle</div>
+            <div class="work-desc">Calculate the area of a circle given its radius. Features real-time calculation and validation.</div>
+          </div>
+        </a>
+
+        <a class="work-card library-card" href="/programming/triangle" aria-label="Area of a Triangle">
+          <div class="work-thumb" aria-hidden="true">
+            <img src="/static/image/prog-triangle.svg" alt="Area of a Triangle thumbnail">
+          </div>
+          <div class="card-body">
+            <div class="work-title">Area of a Triangle</div>
+            <div class="work-desc">Compute the area of any triangle using base and height inputs. Simple, fast, and accurate.</div>
+          </div>
+        </a>
+
+        <a class="work-card library-card" href="/programming/linkedlist" aria-label="Linked List Operations">
+          <div class="work-thumb" aria-hidden="true">
+            <img src="/static/image/prog-linkedlist.svg" alt="Linked List Operations thumbnail">
+          </div>
+          <div class="card-body">
+            <div class="work-title">Linked List Operations</div>
+            <div class="work-desc">Interactive demo of Linked List methods: remove_beginning, remove_at_end, and remove_at(data).</div>
+          </div>
+        </a>
+
+        <a class="work-card library-card" href="/programming/infix" aria-label="Infix to Postfix Converter">
+          <div class="work-thumb" aria-hidden="true">
+            <img src="/static/image/prog-infix.svg" alt="Infix to Postfix thumbnail">
+          </div>
+          <div class="card-body">
+            <div class="work-title">Infix to Postfix</div>
+            <div class="work-desc">Convert infix expressions (e.g. A + B) to postfix (A B +) using the Shunting Yard Algorithm.</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

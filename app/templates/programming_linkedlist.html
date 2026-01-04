@@ -1,0 +1,410 @@
+{% extends 'base.html' %}
+
+{% block title %}Linked List — Programming{% endblock %}
+
+{% block content %}
+<section class="index-hero programming-theme">
+    <div class="prog-header">
+      <div class="prog-banner">
+        <div class="banner-left">PROGRAMMING</div>
+      </div>
+      <div class="prog-stripe" aria-hidden="true">
+        <div class="stripe-inner">
+          <div class="stripe-item"><span class="stripe-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+          </span></div>
+          <div class="stripe-item"><span class="stripe-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+          </span></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container index-content" style="display: flex; flex-direction: column; align-items: center;">
+      <div class="index-text" style="text-align: center; margin-bottom: 24px;">
+        <h1>Linked List Operations</h1>
+      </div>
+
+      <div class="prog-card" style="max-width:750px; width: 100%; padding: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+        
+        <!-- VISUALIZATION -->
+        <h4 class="prog-title" style="text-align: center; font-size: 1.4rem; margin-bottom: 20px; letter-spacing: 0.5px;">Current List</h4>
+        
+        <!-- A "tape" style container for the nodes -->
+        <div id="visual-container" class="visual-tape">
+          <span class="empty-msg">List is empty</span>
+        </div>
+        
+        <div id="status-msg" style="margin-bottom: 40px; text-align: center; font-weight: 600; min-height: 1.2em; color: var(--prog-dark); font-size: 1rem; opacity: 0.8;">Ready</div>
+
+        <!-- CONTROLS -->
+        <h4 class="prog-title" style="text-align: center; font-size: 1.4rem; margin-bottom: 24px;">Controls</h4>
+
+        <!-- Control Grid: 2 Columns for alignment -->
+        <div class="control-grid">
+          
+          <!-- Column 1: Add & Remove Specific (Identical Layouts) -->
+          <div class="control-col">
+             
+             <!-- Add Node -->
+             <div class="control-group">
+                <label for="add-input">Add</label>
+                <div class="separated-row">
+                  <input type="text" id="add-input" placeholder="Enter value..." class="modern-input">
+                  <button id="btn-add" class="btn-modern btn-green">Add</button>
+                </div>
+             </div>
+
+             <!-- Remove Specific -->
+             <div class="control-group">
+                <label for="remove-input">Remove</label>
+                <div class="separated-row">
+                  <input type="text" id="remove-input" placeholder="Value to remove..." class="modern-input">
+                  <button id="btn-remove-at" class="btn-modern btn-red">Remove</button>
+                </div>
+             </div>
+
+          </div>
+
+          <!-- Column 2: Remove Ends (Buttons) -->
+          <div class="control-col" style="display: flex; flex-direction: column; justify-content: center;">
+             <div class="control-group" style="display: flex; flex-direction: column; gap: 24px;">
+                <label style="margin-bottom: -10px;">Quick Remove</label>
+                
+                <button id="btn-remove-beg" class="btn-modern btn-outline-red btn-wide">
+                  <span class="btn-icon">⇤</span> Remove Beginning
+                </button>
+                
+                <button id="btn-remove-end" class="btn-modern btn-outline-orange btn-wide">
+                  Remove End <span class="btn-icon">⇥</span>
+                </button>
+             </div>
+          </div>
+
+        </div>
+
+        <div style="margin-top:40px;text-align:center;">
+          <a href="/programming" class="small-link" style="font-size: 1rem; opacity: 0.6; color: var(--prog-dark); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">&larr; Back to Programs</a>
+        </div>
+      </div>
+    </div>
+</section>
+
+<style>
+  /* Visualization Tape */
+  .visual-tape {
+    min-height: 100px;
+    padding: 24px;
+    background-color: #fdfdfd;
+    background-image: radial-gradient(#e0e0e0 1px, transparent 1px);
+    background-size: 20px 20px;
+    border: 2px solid rgba(0,0,0,0.06);
+    border-radius: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+    justify-content: flex-start;
+    margin-bottom: 16px;
+    box-shadow: inset 0 4px 12px rgba(0,0,0,0.03);
+    overflow-x: auto;
+  }
+  
+  .empty-msg {
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    opacity: 0.5;
+    font-size: 1.1rem;
+    color: var(--prog-dark);
+  }
+
+  /* Nodes */
+  .node-wrapper {
+    display: flex;
+    align-items: center;
+    animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .node {
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #ffffff, #f9f9f9);
+    color: var(--prog-dark);
+    border: 2px solid var(--prog-accent);
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 1.15rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    position: relative;
+    z-index: 2;
+    min-width: 60px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  
+  .node:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+    border-color: var(--prog-accent-2);
+  }
+
+  .arrow {
+    font-size: 1.5rem;
+    color: #bbb;
+    margin: 0 12px;
+    position: relative;
+    top: -1px;
+    font-weight: 300;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* Control Layout */
+  .control-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 50px;
+    align-items: start;
+  }
+  
+  .control-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 10px;
+    color: rgba(38,28,22,0.5);
+  }
+
+  /* Separated Row Style (Input + Button side by side) */
+  .separated-row {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .modern-input, #add-input, #remove-input {
+    flex: 1;
+    width: 100%;
+    min-width: 200px;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 12px 16px !important;
+    font-size: 1rem;
+    background: #fff;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+  }
+  
+  .modern-input:focus {
+    outline: none;
+    border-color: var(--prog-accent);
+    box-shadow: 0 4px 12px rgba(225, 159, 0, 0.1);
+    transform: translateY(-1px);
+  }
+
+  .btn-modern {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  
+  .btn-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  }
+  
+  .btn-modern:active {
+    transform: translateY(0);
+  }
+
+  .btn-green { background: #27ae60; color: white; }
+  .btn-red { background: #c0392b; color: white; }
+
+  /* Wide buttons for column 2 */
+  .btn-wide {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: white;
+  }
+
+  .btn-icon { font-size: 1.2rem; line-height: 1; opacity: 0.8; }
+
+  .btn-outline-red {
+    border: 2px solid rgba(231, 76, 60, 0.2);
+    color: #c0392b;
+  }
+  .btn-outline-red:hover {
+    background: #c0392b;
+    color: white;
+    border-color: #c0392b;
+  }
+
+  .btn-outline-orange {
+    border: 2px solid rgba(243, 156, 18, 0.2);
+    color: #d35400;
+  }
+  .btn-outline-orange:hover {
+    background: #d35400;
+    color: white;
+    border-color: #d35400;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .control-grid { grid-template-columns: 1fr; gap: 32px; }
+    .prog-card { padding: 24px; }
+  }
+
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const visualContainer = document.getElementById('visual-container');
+  const statusMsg = document.getElementById('status-msg');
+
+  function renderList(list) {
+    visualContainer.innerHTML = '';
+    if (list.length === 0) {
+      visualContainer.innerHTML = '<span class="empty-msg">List is empty</span>';
+      return;
+    }
+    
+    list.forEach((item, index) => {
+      // Wrapper for node + arrow
+      const wrapper = document.createElement('div');
+      wrapper.className = 'node-wrapper';
+
+      const node = document.createElement('div');
+      node.className = 'node';
+      node.textContent = item;
+      wrapper.appendChild(node);
+
+      if (index < list.length - 1) {
+        const arrow = document.createElement('div');
+        arrow.className = 'arrow';
+        arrow.innerHTML = '&rarr;';
+        wrapper.appendChild(arrow);
+      }
+      
+      visualContainer.appendChild(wrapper);
+    });
+  }
+
+  async function updateList() {
+    try {
+      const res = await fetch('/api/linkedlist');
+      const list = await res.json();
+      renderList(list);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  // Initial Load
+  updateList();
+
+  function setStatus(msg, type) {
+    statusMsg.textContent = msg;
+    statusMsg.style.opacity = '1';
+    if(type === 'success') statusMsg.style.color = '#27ae60';
+    else if(type === 'error') statusMsg.style.color = '#c0392b';
+    else if(type === 'warn') statusMsg.style.color = '#d35400';
+    
+    // Auto fade after 3s
+    setTimeout(() => { statusMsg.style.opacity = '0.7'; }, 3000);
+  }
+
+  // Add
+  document.getElementById('btn-add').addEventListener('click', async () => {
+    const input = document.getElementById('add-input');
+    const val = input.value.trim();
+    if (!val) return;
+
+    const res = await fetch('/api/linkedlist/add', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ data: val })
+    });
+    const list = await res.json();
+    renderList(list);
+    input.value = '';
+    setStatus(`Added node "${val}"`, 'success');
+  });
+
+  // Remove Beginning
+  document.getElementById('btn-remove-beg').addEventListener('click', async () => {
+    const res = await fetch('/api/linkedlist/remove-beginning', { method: 'POST' });
+    const data = await res.json();
+    renderList(data.list);
+    if (data.removed !== null) {
+      setStatus(`Removed head: "${data.removed}"`, 'warn');
+    } else {
+      setStatus('List is already empty.', 'error');
+    }
+  });
+
+  // Remove End
+  document.getElementById('btn-remove-end').addEventListener('click', async () => {
+    const res = await fetch('/api/linkedlist/remove-end', { method: 'POST' });
+    const data = await res.json();
+    renderList(data.list);
+    if (data.removed !== null) {
+      setStatus(`Removed tail: "${data.removed}"`, 'warn');
+    } else {
+      setStatus('List is already empty.', 'error');
+    }
+  });
+
+  // Remove At
+  document.getElementById('btn-remove-at').addEventListener('click', async () => {
+    const input = document.getElementById('remove-input');
+    const val = input.value.trim();
+    if (!val) return;
+
+    const res = await fetch('/api/linkedlist/remove-at', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ data: val })
+    });
+    const data = await res.json();
+    renderList(data.list);
+    
+    if (data.removed !== null) {
+      setStatus(`Removed "${data.removed}"`, 'success');
+    } else {
+      setStatus(`"${val}" not found.`, 'error');
+    }
+    input.value = '';
+  });
+
+  // Enable Enter key for Add input
+  document.getElementById('add-input').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      document.getElementById('btn-add').click();
+    }
+  });
+
+  // Enable Enter key for Remove input
+  document.getElementById('remove-input').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      document.getElementById('btn-remove-at').click();
+    }
+  });
+
+});
+</script>
+{% endblock %}

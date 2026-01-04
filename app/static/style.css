@@ -1,0 +1,450 @@
+:root{--accent:#2b6cb0;--bg:#f7fafc;--overlay:rgba(0,0,0,0.45);--top-text:rgba(255,255,255,0.95)}
+html,body{height:100%}
+body{font-family:'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;margin:0; color:#fff;
+	/* main page: use a neutral background color instead of the full-res avatar */
+	background: var(--bg);
+}
+
+/* dark overlay to improve contrast */
+body::before{
+	content:'';position:fixed;inset:0;background:var(--overlay);z-index:0;
+}
+
+.container{position:relative;z-index:1;max-width:900px;margin:40px auto;padding:24px 20px}
+.navbar{background:rgba(255,255,255,0.06);backdrop-filter:blur(4px);border-bottom:1px solid rgba(255,255,255,0.06)}
+.navbar .container{display:flex;align-items:center;justify-content:space-between;padding:8px 16px}
+.brand{font-weight:700;color:#fff;text-decoration:none}
+.nav{list-style:none;margin:0;padding:0;display:flex;gap:12px}
+.nav a{
+	text-decoration:none;
+	color:#f0f6fb;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 12px;
+	border-radius: 8px;
+	transition: all 0.2s ease;
+	font-weight: 600;
+}
+.nav a:hover{
+	background: rgba(255,255,255,0.15);
+	color: #fff;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.nav a svg {
+	opacity: 0.9;
+}
+.footer{padding:24px 16px;text-align:center;color:rgba(38,28,22,0.6);font-size: 0.9rem; font-weight: 500;}
+h1,h2,h3{color:#f7fbff}
+.profile{display:flex;gap:16px;align-items:flex-start}
+.avatar{width:120px;height:120px;object-fit:cover;border-radius:8px;background:#ddd;border:3px solid rgba(255,255,255,0.12)}
+.bio{
+	background: rgba(255,255,255,0.6);
+	padding: 16px;
+	border-radius: 8px;
+	border: 1px solid rgba(0,0,0,0.05);
+	box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+.calc{background:rgba(255,255,255,0.06);padding:12px;border-radius:8px;margin-top:12px;border:1px solid rgba(255,255,255,0.06)}
+label{display:block;margin:6px 0;color:#eef6ff}
+button{background:var(--accent);color:#fff;border:0;padding:8px 12px;border-radius:4px;cursor:pointer}
+button:hover{opacity:.95}
+
+/* ==========================
+	 Programming (Works-inspired) styles
+	 ========================== */
+.prog-section{background:linear-gradient(135deg, rgba(43,108,176,0.06), rgba(0,64,128,0.12));
+	border:1px solid rgba(255,255,255,0.04);
+	padding:16px;border-radius:12px;margin-top:18px}
+
+.prog-card{
+	background: #fff;
+	border-radius: 12px;
+	padding: 24px;
+	border: 1px solid rgba(0,0,0,0.06);
+	box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+	margin-top: 8px;
+}
+
+.prog-title{font-size:1rem;font-weight:700;margin-bottom:8px;display:block;
+	background: linear-gradient(90deg,#00bfff,#82aaff); -webkit-background-clip:text; -webkit-text-fill-color:transparent}
+
+.prog-result{
+	margin-top:10px;
+	padding:10px;
+	border-radius:8px;
+	background: rgba(225, 159, 0, 0.1);
+	border-left: 4px solid var(--site-accent);
+	color: var(--site-dark);
+	min-height:36px;
+	display:flex;
+	align-items:center;
+	font-weight: 500;
+}
+
+.prog-result.error{
+	background: rgba(255, 80, 80, 0.1);
+	border-left-color: #e53e3e;
+	color: #9b2c2c;
+}
+
+/* make programming forms clearer and visually closer to works cards */
+.prog-section label{display:block;margin:8px 0;color:#eef6ff}
+.prog-section input{padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.01);color:#fff}
+.prog-section button{margin-top:8px}
+
+.prog-card label {
+	display: block;
+	margin-bottom: 8px;
+	font-weight: 700;
+	color: var(--site-dark);
+}
+
+.prog-card input {
+	width: 100%;
+	padding: 10px 12px;
+	border-radius: 8px;
+	border: 1px solid rgba(0,0,0,0.1);
+	background: #fdfdfd;
+	color: var(--site-dark);
+	font-size: 1rem;
+	transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.prog-card input:focus {
+	border-color: var(--site-accent);
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(225, 159, 0, 0.15);
+	background: #fff;
+}
+
+.prog-card button {
+	width: 100%;
+	padding: 12px;
+	background: linear-gradient(90deg,var(--site-accent),var(--site-accent-2));
+	color: white;
+	border: none;
+	border-radius: 8px;
+	font-weight: 700;
+	font-size: 1rem;
+	cursor: pointer;
+	margin-top: 12px;
+	box-shadow: 0 4px 12px rgba(225, 159, 0, 0.25);
+	transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.prog-card button:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 16px rgba(225, 159, 0, 0.3);
+}
+
+.prog-card button:active {
+	transform: translateY(0);
+}
+
+/* subtle heading style for small-screen harmony */
+.gradient-text{background:linear-gradient(90deg,#00bfff,#76b3ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+/* ==========================
+	Library-style Work Cards
+	========================== */
+.works-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-top:18px}
+
+.work-card.library-card{display:block;padding:0;border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .28s ease,box-shadow .28s ease;position:relative;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 6px 22px rgba(0,0,0,0.36);border:1px solid rgba(255,255,255,0.03)}
+.work-card.library-card:focus,.work-card.library-card:hover{transform:translateY(-8px);box-shadow:0 16px 48px rgba(0,0,0,0.5)}
+
+.work-thumb{height:160px;background:linear-gradient(135deg, rgba(3,45,85,0.9), rgba(0,119,189,0.8));display:block;position:relative;overflow:hidden}
+.work-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.work-thumb::after{content:"";position:absolute;inset:0;display:block;background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.40));pointer-events:none}
+
+.thumb-overlay{position:absolute;left:0;right:0;bottom:0;padding:12px 14px;background:linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.56));display:flex;align-items:flex-end}
+.thumb-overlay .work-title{font-size:1.1rem;margin:0;color:#fff;font-weight:700;line-height:1.15}
+
+.work-card .work-desc{
+	display: block;
+	font-size: 0.9rem;
+	color: rgba(38,28,22,0.75);
+	margin-top: 6px;
+	line-height: 1.4;
+}
+
+.library-card .work-title{color:var(--site-dark)}
+
+/* ==========================
+	 Programming theme (scoped)
+	 ========================== */
+.programming-theme{--prog-bg-1:#f8ecd6;--prog-bg-2:#fae9c7;--prog-accent:#e19f00;--prog-accent-2:#d07b00;--prog-dark:rgba(38,28,22,0.92);}
+
+/* ================
+	 Site-wide theme (inspired by programming theme)
+	 ================ */
+.site-theme{--site-bg-1:#fbf3e6;--site-bg-2:#fff6ec;--site-accent:#e19f00;--site-accent-2:#d07b00;--site-dark:rgba(38,28,22,0.92)}
+
+/* apply a warm page-level background and keep side decorations for atmosphere */
+body.site-theme{
+	background: linear-gradient(180deg, #fbf4e9 0%, #fbf0dc 40%, #f6ead1 100%);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	min-height: 100vh;
+}
+
+/* Add a hero/banner and gold stripe (similar to programming pages) */
+.site-theme .prog-header{margin-bottom:18px;padding-top:8px}
+.site-theme .prog-banner{
+	height:120px;
+	border-radius:8px 8px 0 0;
+	background-image:linear-gradient(120deg, rgba(245,235,220,0.85), rgba(230,200,120,0.8));
+	backdrop-filter: blur(8px);
+	display:flex;align-items:center;justify-content:space-between;padding:18px 28px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.4)
+}
+.site-theme .banner-left{font-weight:900;color:var(--prog-accent);font-size:28px;letter-spacing:2px; text-shadow: 0 2px 10px rgba(255,255,255,0.5);}
+.site-theme .prog-stripe{height:86px;background:linear-gradient(90deg,#d49400,#e7b000);display:flex;align-items:center;justify-content:center;border-radius:0 0 10px 10px;margin-top:8px;width:100%;box-sizing:border-box;padding:0 12px; box-shadow: 0 10px 20px rgba(212, 148, 0, 0.15);}
+.site-theme .prog-stripe .stripe-inner{display:flex;gap:48px}
+.site-theme .stripe-item{display:flex;flex-direction:column;align-items:center;color:var(--site-dark)}
+.site-theme .stripe-icon{
+	display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:#fff;padding:12px;font-weight:900;color:var(--site-accent);width:58px;height:58px;font-size:20px;box-shadow:0 8px 18px rgba(0,0,0,0.06);
+	transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+	cursor: default;
+}
+.site-theme .stripe-icon:hover {
+	transform: translateY(-5px) scale(1.1) rotate(5deg);
+	box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+	color: var(--site-accent-2);
+}
+
+/* apply decorative side panels similar to programming pages so site pages carry the same atmosphere */
+body.site-theme::before, body.site-theme::after{content:"";position:fixed;top:0;bottom:0;width:20%;z-index:0;pointer-events:none;background-image: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.00) 35%);background-size: cover;background-position:center center;opacity:0.12;filter: blur(10px) grayscale(60%) contrast(0.95) saturate(0.8)}
+body.site-theme::before{left:0;transform:translateX(-2%);box-shadow:inset -80px 0 120px rgba(0,0,0,0.06)}
+body.site-theme::after{right:0;transform:translateX(2%);box-shadow:inset 80px 0 120px rgba(0,0,0,0.06)}
+
+/* nav visibility: give a soft translucent pill and stronger shadow (subtle) */
+body.site-theme .navbar{
+	/* align nav with the site banner so the top area reads as a single band */
+	background: linear-gradient(120deg, rgba(245,235,220,0.95), rgba(230,200,120,0.9));
+	position:relative; z-index:9999; border-bottom:1px solid rgba(0,0,0,0.04); box-shadow:none;
+}
+
+/* keep the container behind the navbar as a soft rounded pill to improve contrast on busy backgrounds */
+/* keep the navbar container but use the same feel as the programming page (less translucent) */
+/* remove the pill behind the nav so the navbar blends into the banner */
+body.site-theme nav .container{background:transparent; border-radius:0; padding:8px 28px; box-shadow:none}
+
+/* main content should use the warm card feel */
+body.site-theme main.container{background:linear-gradient(180deg, rgba(255,250,240,0.9), rgba(255,247,235,0.92)); border-radius:10px; box-shadow:0 20px 48px rgba(10,8,6,0.10)}
+
+/* text friendliness for site pages */
+/* headings inside the main hero area should use the single site accent color (one-color heading)
+	similar to the programming page heading style */
+body.site-theme h1, body.site-theme h2, body.site-theme h3{color:var(--site-dark)}
+.site-theme .index-text h1{
+	/* match programming heading style: single dark color, same sizing/spacing */
+	color: var(--site-dark);
+	font-weight: 800;
+	letter-spacing: 0.4px;
+	text-transform: none;
+	font-size: 2rem;
+	margin-bottom: 8px;
+}
+body.site-theme p, body.site-theme li, body.site-theme a{color:rgba(38,28,22,0.86)}
+
+/* buttons used on the index page */
+.btn{display:inline-block;padding:10px 14px;border-radius:8px;background:linear-gradient(90deg,var(--site-accent),var(--site-accent-2));color:#fff;text-decoration:none;font-weight:700;box-shadow:0 8px 26px rgba(160,110,12,0.10);}
+.btn:hover{opacity:0.96;transform:translateY(-2px)}
+
+/* make any simple forms on non-programming pages readable too (uses site colors) */
+body.site-theme label{color:var(--site-dark);font-weight:700}
+body.site-theme input, body.site-theme textarea{background:#fff;color:var(--site-dark);border:1px solid rgba(0,0,0,0.06);padding:8px;border-radius:6px}
+
+/* selection styling for site pages */
+body.site-theme ::selection, body.site-theme *::selection{background: rgba(208,123,0,0.18); color: var(--site-dark)}
+
+/* make the site hero background match the programming per-page hero for a consistent look */
+.site-theme .index-hero{background:linear-gradient(135deg,var(--site-bg-1),var(--site-bg-2));padding:26px 18px;border-radius:10px}
+
+/* make the navbar pill tone and brand identical to programming pages */
+/* make navbar brand and links use the same top text color for parity with programming pages */
+body.site-theme .brand, body.site-theme .nav a{color:var(--top-text); font-weight:700}
+
+.programming-theme .works-section{
+	background: linear-gradient(180deg,var(--prog-bg-1) 0%, var(--prog-bg-2) 80%);
+	color: var(--prog-dark);
+	padding: 36px 22px;border-radius:12px;border:1px solid rgba(0,0,0,0.05);box-shadow:0 12px 30px rgba(32,20,10,0.06);
+}
+
+.programming-theme .prog-heading{font-size:1.6rem;margin:0 0 12px;color:var(--prog-accent);font-weight:800;letter-spacing:2px;text-transform:uppercase}
+
+.programming-theme .works-grid{gap:26px}
+
+.programming-theme .work-card.library-card{border-radius:8px;overflow:hidden;border:1px solid rgba(0,0,0,0.04);background:linear-gradient(180deg, #fbf3e6, #fff6ec);box-shadow:0 18px 36px rgba(20,14,9,0.06);} 
+
+/* enlarge the thumbnail feel and give strong overlay accents */
+.programming-theme .work-thumb{height:220px;border-radius:4px 4px 0 0}
+.programming-theme .work-thumb::after{background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.62));}
+.programming-theme .thumb-overlay{padding:0}
+.programming-theme .work-title{font-size:1.05rem;font-weight:700;color:var(--prog-dark);letter-spacing:0}
+
+.programming-theme .card-body{padding:12px 14px;border-top:1px solid rgba(0,0,0,0.04)}
+.programming-theme .meta{font-size:0.82rem;color:rgba(32,24,20,0.6);margin-top:6px}
+
+.programming-theme .work-card.library-card:focus,.programming-theme .work-card.library-card:hover{transform:translateY(-6px);box-shadow:0 18px 36px rgba(8,6,5,0.12)}
+.programming-theme .work-card.library-card:active{transform:translateY(-2px)}
+
+/* subtle label at top-left like a tag (optional small detail) */
+.programming-theme .work-thumb .top-tag{position:absolute;left:10px;top:10px;background:linear-gradient(90deg,var(--prog-accent),var(--prog-accent-2));padding:6px 10px;border-radius:6px;font-size:0.75rem;color:#fff;font-weight:700;box-shadow:0 6px 18px rgba(4,36,72,0.08)}
+
+/* per-work page header tweaks */
+.programming-theme .index-hero{background:linear-gradient(135deg,var(--prog-bg-1),var(--prog-bg-2));padding:28px 18px;border-radius:10px}
+.programming-theme .index-text h1{font-size:2rem;color: var(--prog-dark);letter-spacing: .4px;margin-bottom:8px}
+
+/* header banner + gold stripe */
+.programming-theme .prog-header{margin-bottom:24px;padding-top:10px}
+.programming-theme .prog-banner{height:120px;border-radius:8px 8px 0 0;background-image:linear-gradient(120deg, rgba(245,235,220,0.95), rgba(230,200,120,0.9));display:flex;align-items:center;justify-content:space-between;padding:18px 28px;position:relative;overflow:hidden;border:1px solid rgba(0,0,0,0.04)}
+.programming-theme .prog-banner.small{height:80px;padding:12px 20px;border-radius:6px}
+.programming-theme .banner-left{font-weight:900;color:var(--prog-accent);font-size:28px;letter-spacing:2px}
+.programming-theme .banner-art{display:none}
+
+.programming-theme .prog-stripe{height:86px;background:linear-gradient(90deg,#d49400,#e7b000);display:flex;align-items:center;justify-content:center;border-radius:0 0 10px 10px;margin-top:8px;width:100%;box-sizing:border-box;padding:0 12px}
+.programming-theme .prog-stripe.small{height:60px;border-radius:0 0 8px 8px;margin-top:6px}
+.programming-theme .prog-stripe .stripe-inner{display:flex;gap:60px}
+.programming-theme .stripe-item{display:flex;flex-direction:column;align-items:center;color:var(--prog-dark)}
+.programming-theme .stripe-icon{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:#fff;padding:14px;font-weight:900;color:var(--prog-accent);width:62px;height:62px;font-size:20px;box-shadow:0 10px 22px rgba(0,0,0,0.10)}
+.programming-theme .stripe-label{display:none}
+.programming-page{ /* body class -- apply color scheme across whole page */
+	background: linear-gradient(180deg, #f9f2e8 0%, #f6ead1 32%, #f2e3bf 100%);
+	background-attachment: fixed;
+}
+
+/* Add decorative side panels that stretch the background imagery across the page sides */
+body.programming-page::before, body.programming-page::after{
+	content:"";position:fixed;top:0;bottom:0;width:20%;z-index:0;pointer-events:none;
+	background-image: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.00) 35%);
+	background-size: cover;background-position:center center;opacity:0.14;filter: blur(12px) grayscale(60%) contrast(0.95) saturate(0.8);
+}
+body.programming-page::before{left:0;transform:translateX(-2%);box-shadow:inset -80px 0 120px rgba(0,0,0,0.08)}
+body.programming-page::after{right:0;transform:translateX(2%);box-shadow:inset 80px 0 120px rgba(0,0,0,0.08)}
+
+/* the banner-art should use the same hero image but be cropped/positioned for variety */
+.programming-theme .prog-banner .banner-art{display:none}
+
+/* Navbar color / contrast adjustments for programming pages */
+/* Navbar should visually blend with the programming header — remove the boxed container
+	and make the navbar background match the header stripe so it reads as a single band */
+
+/* improve visibility on very busy backgrounds: keep the warm brown theme
+	 but add a slightly stronger translucent backdrop, subtle blur, and deeper shadow */
+body.programming-page .navbar{
+	background: linear-gradient(90deg, rgba(243,231,209,0.98), rgba(241,224,194,0.95));
+	position:relative; z-index:9999; border-bottom:1px solid rgba(38,28,22,0.08);
+	/* stronger shadow to anchor the header visually */
+	box-shadow: 0 12px 40px rgba(8,6,4,0.12);
+	/* a small glassy blur helps separate it from a patterned background */
+	backdrop-filter: blur(4px) saturate(1.05);
+}
+
+/* navbar text should match the same warm, readable dark-brown used across the header */
+body.programming-page .brand, body.programming-page .nav a{color:var(--top-text); font-weight:700; letter-spacing:0.4px}
+
+/* give the navbar container a subtle, semi-opaque pill so the links/readability
+	 are preserved on top of very decorative backgrounds */
+body.programming-page nav .container{background:transparent;border-radius:0;padding:8px 28px;box-shadow:none}
+body.programming-page .brand, body.programming-page .nav a{color:var(--top-text); font-weight:700; letter-spacing:0.4px}
+/* use the same warm yellow for nav links so the top bar is consistent */
+body.programming-page .nav a{opacity:0.95}
+body.programming-page .nav a:hover{color:var(--prog-accent);opacity:1}
+
+/* small visual polish: larger gap on the sides and rounded container feel */
+.programming-theme{padding:26px;border-radius:14px;margin-top:22px}
+.programming-theme .works-section{padding:36px;border-radius:12px}
+
+/* Ensure full-width programming background blends behind the container */
+/* only make the MAIN content container have the soft inner card look; footer (also using .container)
+	should remain transparent so we don't get a stray white box at the bottom */
+body.programming-page main.container{background:linear-gradient(180deg, rgba(255,250,240,0.88), rgba(255,245,235,0.88)); border-radius:10px; box-shadow:0 20px 48px rgba(10,8,6,0.12)}
+
+/* keep other .container instances (like the footer) transparent */
+body.programming-page .container:not(main.container){background:transparent; box-shadow:none}
+
+/* page-level background behind programming area (scoped so other pages unaffected) */
+.programming-theme{background-image:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.6) 0, rgba(255,255,255,0.0) 18%), linear-gradient(180deg, rgba(255,250,240,0.6), rgba(250,242,225,0.95));padding:20px;border-radius:12px}
+.programming-theme .works-section{padding:28px;border-radius:10px}
+
+@media (max-width:700px){
+	.programming-theme .work-thumb{height:150px}
+	.programming-theme .work-title{font-size:1.0rem}
+	.programming-theme .prog-banner{height:100px}
+	.programming-theme .prog-stripe{height:54px}
+}
+
+/* ==========================
+	Improve readability for programming forms & cards
+	========================== */
+.programming-theme .prog-section label,
+.programming-theme .prog-section legend,
+.programming-theme .card-body,
+.programming-theme .works-section,
+.programming-theme .index-text,
+.programming-theme .index-text p{color:rgba(38,28,22,0.92)}
+
+/* Make sure label / small inline help text is definitely readable */
+.programming-theme .prog-section label{color:var(--prog-dark);font-weight:700}
+
+/* Labels inside the prog-card (forms) need the same visibility — make them darker and clearer */
+.programming-theme .prog-card label{color:var(--prog-dark);font-weight:700;display:block;margin:8px 0;font-size:0.95rem}
+
+/* Inputs inside programming pages should be dark text on a warm, near-white background */
+.programming-theme .prog-section input,
+.programming-theme input[type="text"],
+.programming-theme input[type="number"],
+.programming-theme textarea{color:var(--prog-dark);background:rgba(255,255,255,0.92);border:1px solid rgba(0,0,0,0.06);padding:8px;border-radius:6px}
+
+.programming-theme .prog-section input::placeholder,
+.programming-theme textarea::placeholder{color:rgba(38,28,22,0.45)}
+
+/* Buttons: use the warm accent color and stronger contrast */
+.programming-theme .prog-section button,
+.programming-theme button{background:var(--prog-accent);color:#fff;border:0;padding:8px 12px;border-radius:6px;box-shadow:0 8px 18px rgba(160,110,12,0.12)}
+.programming-theme button:hover{opacity:0.96;transform:translateY(-1px)}
+
+/* Results area should be readable and match the theme */
+.programming-theme .prog-result{background:linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,250,240,0.86));border-left:4px solid rgba(208,123,0,0.9);color:rgba(34,26,20,0.88);min-height:42px;padding:10px;border-radius:8px}
+.programming-theme .prog-result.error{background:linear-gradient(90deg, rgba(255,240,240,0.95), rgba(255,240,240,0.92));border-left-color:rgba(220,40,40,0.95);color:rgba(65,10,10,0.92)}
+
+/* Stronger contrast for small interactive links inside programming pages */
+.programming-theme a.small-link{color:rgba(38,28,22,0.6);font-weight:700}
+
+/* Slightly darken any headings inside the programming card area */
+.programming-theme h1,.programming-theme h2,.programming-theme h3{color:var(--prog-dark)}
+
+/* Make selected (highlighted) text more readable inside programming pages
+	 — use warm gold-ish highlight with dark text for contrast instead of the default blue/white */
+.programming-theme ::selection,
+.programming-theme *::selection{
+	background: rgba(208,123,0,0.20);
+	color: var(--prog-dark);
+}
+
+/* Also handle Mozilla selection pseudo-element */
+.programming-theme ::-moz-selection,
+.programming-theme *::-moz-selection{
+	background: rgba(208,123,0,0.20);
+	color: var(--prog-dark);
+}
+
+.small-link{font-size:0.85rem;color:#bfe6ff;text-decoration:none}
+.small-link:hover{text-decoration:underline}
+
+/* Page Load Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+main.container {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.contact-card-link:hover .bio {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+}

@@ -7,7 +7,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
       const data = new FormData(circleForm)
       const res = await fetch(circleForm.action, {method:'POST', body:data})
       const text = await res.text()
-      document.getElementById('circle-result').innerText = text
+      const el = document.getElementById('circle-result')
+      el.classList.toggle('error', !res.ok)
+      el.innerText = text
     })
   }
   if(triangleForm){
@@ -16,7 +18,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
       const data = new FormData(triangleForm)
       const res = await fetch(triangleForm.action, {method:'POST', body:data})
       const text = await res.text()
-      document.getElementById('triangle-result').innerText = text
+      const el = document.getElementById('triangle-result')
+      el.classList.toggle('error', !res.ok)
+      el.innerText = text
     })
   }
 })

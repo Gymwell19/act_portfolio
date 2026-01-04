@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+
+{% block title %}Infix to Postfix — Programming{% endblock %}
+
+{% block content %}
+<section class="index-hero programming-theme">
+    <div class="prog-header">
+      <div class="prog-banner">
+        <div class="banner-left">PROGRAMMING</div>
+      </div>
+      <div class="prog-stripe" aria-hidden="true">
+        <div class="stripe-inner">
+          <div class="stripe-item"><span class="stripe-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
+          </span></div>
+          <div class="stripe-item"><span class="stripe-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+          </span></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container index-content" style="display: flex; flex-direction: column; align-items: center;">
+      <div class="index-text" style="text-align: center; margin-bottom: 24px;">
+        <h1>Infix to Postfix Converter</h1>
+      </div>
+
+      <div class="prog-card" style="max-width:600px; width: 100%; padding: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);">
+        
+        <h4 class="prog-title" style="text-align: center; font-size: 1.4rem; margin-bottom: 24px;">Enter Expression</h4>
+
+        <div class="control-group">
+            <label for="infix-input">Infix Expression</label>
+            <div class="separated-row">
+              <input type="text" id="infix-input" placeholder="e.g. A + B * C" class="modern-input">
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <button id="btn-convert" class="btn-modern btn-purple btn-wide">Convert to Postfix</button>
+        </div>
+
+        <div id="result-container" style="margin-top: 30px; display: none;">
+            <label style="display: block; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; color: rgba(38,28,22,0.5);">Postfix Result</label>
+            <div id="postfix-output" class="result-box"></div>
+        </div>
+        
+        <div id="status-msg" style="margin-top: 10px; text-align: center; min-height: 1.2em; font-size: 0.9rem; opacity: 0; transition: opacity 0.3s;"></div>
+
+        <div style="margin-top:40px;text-align:center;">
+          <a href="/programming" class="small-link" style="font-size: 1rem; opacity: 0.6; color: var(--prog-dark); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">&larr; Back to Programs</a>
+        </div>
+      </div>
+    </div>
+</section>
+
+<style>
+  .control-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 10px;
+    color: rgba(38,28,22,0.5);
+  }
+
+  .modern-input {
+    width: 100%;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 1.1rem;
+    background: #fff;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    font-family: monospace; 
+  }
+  
+  .modern-input:focus {
+    outline: none;
+    border-color: var(--prog-accent);
+    box-shadow: 0 4px 12px rgba(142, 45, 226, 0.1);
+    transform: translateY(-1px);
+  }
+
+  .btn-modern {
+    padding: 14px 24px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  
+  .btn-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  }
+
+  .btn-purple { 
+    background: linear-gradient(135deg, #8E2DE2, #4A00E0); 
+    color: white; 
+  }
+
+  .btn-wide {
+    width: 100%;
+  }
+
+  .result-box {
+    background: #fdfdfd;
+    border: 2px solid rgba(0,0,0,0.06);
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--prog-dark);
+    font-family: monospace;
+    text-align: center;
+    word-break: break-all;
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const btnConvert = document.getElementById('btn-convert');
+  const input = document.getElementById('infix-input');
+  const resultContainer = document.getElementById('result-container');
+  const output = document.getElementById('postfix-output');
+  const statusMsg = document.getElementById('status-msg');
+
+  function setStatus(msg, type) {
+    statusMsg.textContent = msg;
+    statusMsg.style.opacity = '1';
+    statusMsg.style.color = type === 'error' ? '#c0392b' : '#27ae60';
+    setTimeout(() => { statusMsg.style.opacity = '0'; }, 3000);
+  }
+
+  async function convert() {
+    const expression = input.value.trim();
+    if (!expression) {
+        setStatus('Please enter an expression', 'error');
+        return;
+    }
+
+    try {
+        const res = await fetch('/api/infix-to-postfix', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ expression: expression })
+        });
+        
+        if (!res.ok) throw new Error('Conversion failed');
+        
+        const data = await res.json();
+        
+        if (data.postfix) {
+            output.textContent = data.postfix;
+            resultContainer.style.display = 'block';
+            setStatus('Converted successfully!', 'success');
+        } else {
+            setStatus('Error converting expression', 'error');
+        }
+    } catch (e) {
+        console.error(e);
+        setStatus('An error occurred.', 'error');
+    }
+  }
+
+  btnConvert.addEventListener('click', convert);
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      convert();
+    }
+  });
+});
+</script>
+{% endblock %}
